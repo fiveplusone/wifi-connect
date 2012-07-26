@@ -1,0 +1,12 @@
+#!/bin/bash
+
+sudo killall wpa_supplicant
+sudo killall dhcpcd
+sudo ip link set wlan0 up
+sudo iwconfig wlan0 essid "$1"
+echo "Associating with ESSID $1"
+if [ ${#@} -eq 2 ] ; then
+  wpa_passphrase $1 "$2" | sudo tee -a /etc/wpa_supplicant.conf
+fi
+sudo wpa_supplicant -i wlan0 -c /etc/wpa_supplicant.conf -B
+sudo dhcpcd wlan0

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sudo ip link set wlan0 up
+sudo iwlist wlan0 scan | grep ESSID | sed -e 's/^\s*ESSID://g' -e 's/\"//g'

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cat /etc/wpa_supplicant.conf | grep ssid | sed -e 's/^\s*ssid=//g' -e 's/\"//g'
